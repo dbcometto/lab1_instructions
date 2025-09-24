@@ -70,13 +70,13 @@ if __name__ == "__main__":
     # msg_files = os.listdir(msg_dir)
     # print("msg iles",msg_files)
 
-    assert("msg" in os.listdir(package_dir) and "launch" in os.listdir(package_dir) and "python" in os.listdir(package_dir)), "Required folders 'python', 'msg', and 'launch' are missing."
+    # assert("msg" in os.listdir(package_dir) and "launch" in os.listdir(package_dir) and "python" in os.listdir(package_dir)), "Required folders 'python', 'msg', and 'launch' are missing."
 
-    assert("Customgps.msg" in os.listdir(package_dir+"msg/")), "No Customgps.msg file found or is the naming convention correct ?"
+    # assert("Customgps.msg" in os.listdir(package_dir+"msg/")), "No Customgps.msg file found or is the naming convention correct ?"
 
-    assert("standalone_driver.py" in os.listdir(package_dir+"python/")), "No standalone_driver.py file found in python folder"
+    # assert("standalone_driver.py" in os.listdir(package_dir+"python/")), "No standalone_driver.py file found in python folder"
 
-    assert("standalone_driver.launch" in os.listdir(package_dir+"launch/")), "No standalone_driver.launch file found in launch folder"
+    # assert("standalone_driver.launch" in os.listdir(package_dir+"launch/")), "No standalone_driver.launch file found in launch folder"
 
 
     
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     subprocess.run(["bash", "-c", command])
 
 
-    os.system('screen -S ros_node -dm ros2 launch "'+package+'" standalone_driver.launch port:="'+port+'"')
+    os.system('screen -S ros_node -dm ros2 launch "'+package+'" standalone_driver.launch.py port:="'+port+'"')
 
     print("Screen Running, your ROS node should start within 10 seconds.")
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     
 
     try :
-        from gps_driver.msg import Customgps
+        from gps_interface.msg import Customgps
     except:
         try:
             from gpsdriver.msg import Customgps
@@ -271,9 +271,9 @@ if __name__ == "__main__":
         msg_structure_ok = False
         cumulative_comment,cumulative_penalty = cumulative_comment +"ROS2 message structure is incorrect. ",cumulative_penalty + 1
 
-    if callback_received:
-                print("callback received")
-                os.kill(os.getpid(), 2)
+    # if callback_received:
+    #             print("callback received")
+    #             os.kill(os.getpid(), 2)
 
     os.system("screen -S ros_node -X quit")
 
